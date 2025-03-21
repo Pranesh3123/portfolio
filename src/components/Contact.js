@@ -24,7 +24,6 @@ export const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setButtonText('Sending...');
-        
 
         try {
             let response = await fetch(`${API_URL}/contact`, {
@@ -44,7 +43,7 @@ export const Contact = () => {
             }
         } catch (error) {
             console.error("Fetch error:", error);
-            setStatus({ success: false, message: "Network error, please try again." });
+            // setStatus({ success: false, message: "Network error, please try again." });
             setButtonText('Send');
         }
     };
