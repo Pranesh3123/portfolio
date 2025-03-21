@@ -10,15 +10,18 @@ const app = express();
 app.use(express.json());  // Ensures JSON parsing
 app.use(express.urlencoded({ extended: true }));  // Handles URL-encoded data
 app.use(cors({
-    origin: ["https://portfolio-obgm.onrender.com", "http://localhost:3000"], // Allow both production and local frontend
+    origin: ["https://portfolio-five-pearl-50.vercel.app/","https://portfolio-obgm.onrender.com"], // Allow both production and local frontend
     methods: ["GET", "POST"], // Specify allowed methods
     allowedHeaders: ["Content-Type"] // Allow required headers
 }));
 
+app.options("*", cors());
+
 
 // Test route
-app.get("/", (req, res) => {
-    res.send("Server is running!");
+app.get("/contact", (req, res) => {
+    console.log("Received request:", req.body);
+    res.json({ success: true, message: "Test response" });
 });
 
 app.post("/contact", async (req, res) => {
