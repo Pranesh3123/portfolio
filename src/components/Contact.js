@@ -23,28 +23,30 @@ export const Contact = () => {
     const API_URL = "https://portfolio-obgm.onrender.com";
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setButtonText('Sending...');
-
+        setButtonText("Sending...");
+    
         try {
-            let response = await fetch(`${API_URL}/contact`, {
+            let response = await fetch(`http://localhost:5000/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formDetails),  // ✅ Ensure JSON is properly formatted
+                body: JSON.stringify(formDetails),
             });
     
-            let result = await response.json(); // ✅ Parse response as JSON
+            let result = await response.json();
             setStatus({ success: response.ok, message: result.message });
     
             if (response.ok) {
-                setFormDetails(formInitialDetails);
-                setButtonText('Sent ✅');
+                setTimeout(() => { // Delay clearing to confirm success visually
+                    setFormDetails({ ...formInitialDetails });
+                    setButtonText("Sent ✅");
+                }, 1000);
             } else {
-                setButtonText('Send');
+                setButtonText("Send");
             }
         } catch (error) {
             console.error("Fetch error:", error);
-            // setStatus({ success: false, message: "Network error, please try again." });
-            setButtonText('Send');
+            setStatus({ success: false, message: "There is a network issue" });
+            setButtonText("Send");
         }
     };
     

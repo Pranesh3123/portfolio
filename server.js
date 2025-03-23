@@ -5,15 +5,8 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
-
-// ✅ Middleware to parse JSON body
-app.use(express.json());  // Ensures JSON parsing
-app.use(express.urlencoded({ extended: true }));  // Handles URL-encoded data
-app.use(cors({
-    origin: ["https://portfolio-five-pearl-50.vercel.app/","https://portfolio-obgm.onrender.com"], // Allow both production and local frontend
-    methods: ["GET", "POST"], // Specify allowed methods
-    allowedHeaders: ["Content-Type"] // Allow required headers
-}));
+app.use(cors({ origin: "http://localhost:8080", credentials: true }));
+app.use(express.json());
 
 app.options("*", cors());
 
@@ -65,3 +58,4 @@ app.post("/contact", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
