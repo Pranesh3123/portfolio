@@ -20,14 +20,14 @@ export const Contact = () => {
         setFormDetails({ ...formDetails, [field]: value });
     };
 
-    const API_URL = "https://portfolio-obgm.onrender.com";
+    const API_URL = "https://portfolio-wi3u.onrender.com";
     const handleSubmit = async (e) => {
         e.preventDefault();
         setButtonText('Sending...');
         
 
         try {
-            let response = await fetch(`http://localhost:5000/contact`, {
+            let response = await fetch(`${API_URL}/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formDetails),

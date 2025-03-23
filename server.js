@@ -5,7 +5,11 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:8080", credentials: true }));
+app.use(cors({
+    origin: "https://portfolio-phi-lilac-68.vercel.app",  // ✅ Allow frontend domain
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true
+}));
 app.use(express.json());
 
 app.options("*", cors());
