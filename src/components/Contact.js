@@ -23,8 +23,9 @@ export const Contact = () => {
     const API_URL = "https://portfolio-obgm.onrender.com";
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setButtonText("Sending...");
-    
+        setButtonText('Sending...');
+        
+
         try {
             let response = await fetch(`http://localhost:5000/contact`, {
                 method: "POST",
@@ -45,8 +46,8 @@ export const Contact = () => {
             }
         } catch (error) {
             console.error("Fetch error:", error);
-            setStatus({ success: false, message: "There is a network issue" });
-            setButtonText("Send");
+            setStatus({ success: false, message: "Network error, please try again." });
+            setButtonText('Send');
         }
     };
     
