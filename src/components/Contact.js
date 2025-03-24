@@ -20,11 +20,12 @@ export const Contact = () => {
         setFormDetails({ ...formDetails, [field]: value });
     };
 
+    // ✅ Use environment variable (for future improvements)
     const API_URL = "https://portfolio-wi3u.onrender.com";
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setButtonText('Sending...');
-        
 
         try {
             let response = await fetch(`${API_URL}/contact`, {
@@ -32,14 +33,18 @@ export const Contact = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formDetails),
             });
-    
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             let result = await response.json();
             setStatus({ success: response.ok, message: result.message });
-    
+
             if (response.ok) {
-                setTimeout(() => { // Delay clearing to confirm success visually
+                setTimeout(() => { 
                     setFormDetails({ ...formInitialDetails });
-                    setButtonText("Sent ✅");
+                    setButtonText("Send");
                 }, 1000);
             } else {
                 setButtonText("Send");
@@ -50,7 +55,7 @@ export const Contact = () => {
             setButtonText('Send');
         }
     };
-    
+
     return (
         <section className="contact" id='connect'>
             <Container>
