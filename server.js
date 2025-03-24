@@ -5,25 +5,31 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
-// ✅ Use environment variable for frontend URL
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://portfolio-phi-lilac-68.vercel.app";
-
+// ✅ Fix CORS: Allow requests from Vercel frontend
 app.use(cors({
-    origin: FRONTEND_URL,  
+    origin: "https://portfolio-phi-lilac-68.vercel.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true
 }));
 
 app.use(express.json());
 
-// ✅ Test route for debugging
-app.get("/", (req, res) => {
-    res.json({ success: true, message: "Server is running!" });
+// ✅ Add CORS headers manually for all responses
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://portfolio-phi-lilac-68.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+});
+
+// Test Route (Check if backend is reachable)
+app.get("/test", (req, res) => {
+    res.json({ success: true, message: "Backend is working!" });
 });
 
 // ✅ Contact Form Route
 app.post("/contact", async (req, res) => {
-    console.log("Received Data:", req.body);  // Debugging
+    console.log("Received Data:", req.body);
     const { firstName, lastName, email, message, phone } = req.body;
 
     if (!firstName || !email || !message) {
@@ -61,6 +67,6 @@ app.post("/contact", async (req, res) => {
     }
 });
 
-// ✅ Use Render-assigned port for deployment
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
