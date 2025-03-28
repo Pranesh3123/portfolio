@@ -3,8 +3,16 @@ import project1 from "../assets/img/projectImg-1.png";
 import project2 from "../assets/img/projectImg-2.png";
 import project3 from "../assets/img/projectImg-3.png";
 import project4 from "../assets/img/projectImg-4.png";
+import project5 from "../assets/img/projectImg-5.png";
 
 export const projects = [
+        {
+          imgUrl: project5,
+          title: "Study Room",
+          deployment: "https://stackflow-chartroom.onrender.com",
+          description:
+            "Study Room is a web-based learning platform built using Python and Django for the backend, with HTML, CSS, and Bootstrap for the frontend. This project serves as an online hub where students can access study materials, browse courses, and manage their learning progress efficiently."
+        },
         {
           imgUrl:project2,
           title: "Book Finder",
@@ -19,13 +27,7 @@ export const projects = [
           description:
             "This E-Commerce Website is a full-fledged online shopping platform built using React for the frontend and integrated with handling products, user authentication, and add to cart. The project provides a seamless shopping experience with features such as product listings, user authentication, cart management, and a secure process.",
         },
-        {
-          imgUrl: defaultImg,
-          title: "Study Room",
-          deployment: "",
-          description:
-            "Study Room is a web-based learning platform built using Python and Django for the backend, with HTML, CSS, and Bootstrap for the frontend. This project serves as an online hub where students can access study materials, browse courses, and manage their learning progress efficiently."
-        },
+      
         {
           imgUrl: project3,
           title: "Chatbot",
